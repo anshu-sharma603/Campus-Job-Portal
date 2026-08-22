@@ -25,7 +25,7 @@ export const registerCompany = async (req,res) => {
 
         return res.status(201).json({
             message: "Copmany register successfully.",
-            Company,
+            company,
             success: true
         });
 
@@ -44,6 +44,10 @@ export const getCompany = async (req, res) => {
                 success: false
             });
         }
+        return res.status(200).json({
+            companies,
+            success:true
+        });
     } catch (eror) {
         console.log(eror);
     }
@@ -81,7 +85,7 @@ export const updateCompany = async (req, res) => {
 
         const updateData = { name, description, website, location };
 
-        const company = await Company.findByIdAndUpdate(req.params.id, updateData, { new: true });
+        const company = await Company.findByIdAndUpdate(req.params.id, updateData,  { new: true } );
         if(!company){
             return res.status(400).json({
                 message:"company not found",
