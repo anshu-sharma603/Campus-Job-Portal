@@ -35,14 +35,14 @@ const jobSchema = new mongoose.Schema({
     },
     company:{
         type:mongoose.Schema.Types.ObjectId,
-        ref : 'company',
+        ref : 'Company',
     },
     created_by:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',
         required:true,
     },
-    application:[
+    applications:[
         {
             type:mongoose.Schema.Types.ObjectId,
             ref:'Application',

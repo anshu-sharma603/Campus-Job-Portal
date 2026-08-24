@@ -3,7 +3,7 @@ import { Job } from "../models/job.model.js";
 //admin pannel
 export const postJob = async (req, res) => {
     try {
-        const { title, description, requirment, salary, location, experience, jobType, position, companyId } = req.body;
+        const { title, description, requirment, salary, location, experience, jobType, position,company:companyId} = req.body;
         const userId = req.id;
 
         console.log(req.body);   
@@ -24,7 +24,7 @@ export const postJob = async (req, res) => {
             experienceLevel: experience,
             jobType,
             position,
-            companyId,
+            company:companyId,
             created_by: userId
         });
         return res.status(201).json({
@@ -48,7 +48,9 @@ export const getAllJobs = async (req, res) => {
                 { description: { $regex: keyword, $options: "i" } },
             ]
         };
-        const jobs = await Job.find(query);
+        const jobs = await Job.find(query).populate({
+            path:"company"
+        }).sort({createdAt : -1});
         if (!jobs) {
             return res.status(400).json({
                 message: "Jobs not found.",
