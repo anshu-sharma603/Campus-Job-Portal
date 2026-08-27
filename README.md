@@ -1,4 +1,4 @@
-Campus Job Portal
+Campus Job Portal--------------
 
 A full-stack MERN (MongoDB, Express, React, Node.js) job portal that connects students with companies for campus placements. Students can browse and apply to job postings, while companies/recruiters can post jobs and manage applicants.
 
