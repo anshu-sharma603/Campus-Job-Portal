@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken"
 export const register = async (req, res) => {
     try {
         const { fullName, email, phoneNumber, password, role } = req.body;
-        console.log(error);
+        console.log(fullName, email, phoneNumber, password, role);
         if (!fullName || !email || !phoneNumber || !password || !role) {
             return res.status(400).json({
                 message: "Something is  missing.",
@@ -94,7 +94,7 @@ export const login = async (req, res) => {
         return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpsOnly: true, sameSite: 'strict' }).json({
             message: `Welcome back ${user.fullName}`,
             user,
-            sucess: true
+            success: true
         });
 
     } catch (eror) {

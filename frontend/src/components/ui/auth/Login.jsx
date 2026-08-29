@@ -8,6 +8,8 @@ import { USER_API_END_POINT } from '../../../utils/constant'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { toast } from 'sonner'
+import { useDispatch, useSelector } from 'react-redux'
+import { setLoading } from '@/redux/authSlice'
 
 
 function Login() {
@@ -18,41 +20,33 @@ function Login() {
 
   });
 
+  const {Loading} = useSelector(store => store.auth);
   const navigate = useNavigate();
-  
+  const dispatch = useDispatch();
+
   const changeEventHandler = (e) => (
     setInput({ ...input, [e.target.name]: e.target.value }));
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("fullName", input.fullName);
-    formData.append("email", input.email);
-    formData.append("phoneNumber", input.phoneNumber);
-    formData.append("password", input.password);
-    formData.append("role", input.role);
-    if (input.file) {
-      formData.append("file", input.file);
-
-    }
-
     try {
+      dispatch(setLoading(true));
       const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
         headers: {
           "Content-Type": "application/json"
         },
         withCredentials: true,
-      })
+      });
+      // console.log(res.data.success);
       if (res.data.success) {
         navigate("/");
         toast.success(res.data.message);
-
       }
-
     } catch (error) {
-      console.log(error);
+      console.log(error.response?.data);
       toast.error(error.response.data.message);
-
+    }finally{
+      dispatch(setLoading(false));
     }
   }
   return (
@@ -70,6 +64,8 @@ function Login() {
               name="email"
               onChange={changeEventHandler}
               placeholder="mohan@123"
+              autoComplete="off"
+
             />
           </div>
 
@@ -81,6 +77,8 @@ function Login() {
               name="password"
               onChange={changeEventHandler}
               placeholder="mohan"
+              autoComplete="new-password"
+
             />
           </div>
           <div className='flex item-center justify-between'>
@@ -100,17 +98,19 @@ function Login() {
                 <input
                   type="radio"
                   name="role"
-                  value="recuiter"
-                  checked={input.role === 'recuiter'}
+                  value="recruiter"
+                  checked={input.role === 'recruiter'}
                   onChange={changeEventHandler}
                   className="cursor-pointer"
                 />
                 <Label htmlFor="r2">Recruiter</Label>
               </div>
             </RadioGroup>
-
           </div>
-          <Button type="submit" className="w-full my-4 ">Login</Button>
+          {
+            Loading ? <Button className= 'w-full m-4'> <Loader2 className='mr-2 h-4 w-4 animate spin'/>Please wait</Button> : <Button type="submit" className="w-full my-4 ">Login</Button>
+          }
+          
           <span className='text-sm'>Don't have an account? <Link to="/Signup" className="text-blue-600">Signup</Link></span>
         </form>
       </div>
