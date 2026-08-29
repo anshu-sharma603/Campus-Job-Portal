@@ -20,7 +20,7 @@ function Login() {
 
   });
 
-  const {Loading} = useSelector(store => store.auth);
+  const { Loading } = useSelector(store => store.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -45,7 +45,7 @@ function Login() {
     } catch (error) {
       console.log(error.response?.data);
       toast.error(error.response.data.message);
-    }finally{
+    } finally {
       dispatch(setLoading(false));
     }
   }
@@ -108,9 +108,9 @@ function Login() {
             </RadioGroup>
           </div>
           {
-            Loading ? <Button className= 'w-full m-4'> <Loader2 className='mr-2 h-4 w-4 animate spin'/>Please wait</Button> : <Button type="submit" className="w-full my-4 ">Login</Button>
+            Loading ? <Button className='w-full m-4'> <Loader2 className='mr-2 h-4 w-4 animate spin' />Please wait</Button> : <Button type="submit" className="w-full my-4 ">Login</Button>
           }
-          
+
           <span className='text-sm'>Don't have an account? <Link to="/Signup" className="text-blue-600">Signup</Link></span>
         </form>
       </div>
