@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from './components/ui/auth/Login';
 import Signup from './components/ui/auth/Signup';
 import Home from './components/ui/Home';
+import Jobs from './components/ui/Jobs';
 
 const appRouter = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const appRouter = createBrowserRouter([
     path: '/signup',
     element: <Signup/>
   },
+  {
+    path : '/jobs',
+    element : <Jobs/>
+  }
 
 ]);
 
