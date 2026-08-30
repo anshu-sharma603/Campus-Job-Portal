@@ -10,6 +10,7 @@ import { toast } from 'sonner'
 import { USER_API_END_POINT } from '../../../utils/constant'
 import { useDispatch } from 'react-redux'
 import { setLoading } from '@/redux/authSlice'
+import { useSelector } from 'react-redux';
 
 function Signup() {
     const [input, setInput] = useState({
