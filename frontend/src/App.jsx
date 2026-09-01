@@ -5,33 +5,38 @@ import Home from './components/ui/Home';
 import Jobs from './components/ui/Jobs';
 import Browse from './components/ui/Browse';
 import Profile from './components/ui/Profile';
+import JobDescription from './components/ui/JobDescription';
 
 const appRouter = createBrowserRouter([
   {
     path: '/',
-    element: <Home/>
+    element: <Home />
   },
 
   {
     path: '/login',
-    element: <Login/>
+    element: <Login />
   },
 
   {
     path: '/signup',
-    element: <Signup/>
+    element: <Signup />
   },
   {
-    path : '/jobs',
-    element : <Jobs/>
+    path: '/jobs',
+    element: <Jobs />
   },
   {
-    path : '/browse',
-    element : <Browse/>
+    path: '/description/:id',
+    element: <JobDescription />
   },
   {
-    path : '/profile',
-    element : <Profile/>
+    path: '/browse',
+    element: <Browse />
+  },
+  {
+    path: '/profile',
+    element: <Profile />
   },
 
 ]);
